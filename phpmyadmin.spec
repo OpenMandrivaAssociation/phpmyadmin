@@ -3,7 +3,7 @@
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
 Version:        2.10.0.2
-Release:        %mkrel 2
+Release:        %mkrel 3
 License:        GPL
 Group:          System/Servers
 URL:            http://www.phpmyadmin.net/
@@ -17,10 +17,6 @@ Patch1:         phpMyAdmin-2.8.2.1-bug23847.diff
 Patch2:         phpMyAdmin-bug22020.diff
 Requires(pre):  apache-mod_php php-mysql php-mbstring php-mcrypt
 Requires:       apache-mod_php php-mysql php-mbstring php-mcrypt
-%if %mdkversion >= 200700
-Requires(post): desktop-file-utils
-Requires(postun): desktop-file-utils
-%endif
 Requires(post): rpm-helper
 Requires(postun): rpm-helper
 BuildArch:      noarch
@@ -183,16 +179,10 @@ perl -pi -e "s|_BLOWFISH_SECRET_|$BLOWFISH|g" %{_sysconfdir}/%{name}/config.defa
 
 %_post_webapp
 %update_menus
-%if %mdkversion >= 200700
-%update_desktop_database
-%endif
 
 %postun
 %_postun_webapp
 %clean_menus
-%if %mdkversion >= 200700
-%clean_desktop_database
-%endif
 
 %clean
 rm -rf %{buildroot}
@@ -209,5 +199,3 @@ rm -rf %{buildroot}
 %{_miconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
 %{_datadir}/applications/*.desktop
-
-
