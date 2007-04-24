@@ -2,8 +2,8 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        2.10.0.2
-Release:        %mkrel 3
+Version:        2.10.1
+Release:        %mkrel 1
 License:        GPL
 Group:          System/Servers
 URL:            http://www.phpmyadmin.net/
@@ -51,17 +51,6 @@ for i in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13}; do
 done
 popd
 
-# clean up CVS stuff
-for i in `find . -type d -name CVS` `find . -type f -name .cvs\*` `find . -type f -name .#\*`; do
-    if [ -e "$i" ]; then rm -r $i; fi >&/dev/null
-done
-
-# fix dir perms
-find . -type d | xargs chmod 755
-
-# fix file perms
-find . -type f | xargs chmod 644
-
 # strip away annoying ^M
 find -type f | grep -v "\.gif" | grep -v "\.png" | grep -v "\.jpg" | grep -v "\.z" | xargs %{__perl} -pi -e 's/\r$//g'
 
@@ -96,7 +85,6 @@ config.default.php. From 2.8.0 the file moved into libraries/
 
 Now the file is put in /etc/phpMyAdmin/config.default.php and softlinked
 to /var/www/%{name}/libraries/config.default.php
-
 EOF
 
 cat > %{buildroot}%{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf << EOF
@@ -188,7 +176,7 @@ perl -pi -e "s|_BLOWFISH_SECRET_|$BLOWFISH|g" %{_sysconfdir}/%{name}/config.defa
 rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root)
+%defattr(0644,root,root,0755)
 %doc CREDITS ChangeLog Documentation.txt INSTALL LICENSE README RELEASE-DATE-* TODO scripts README.urpmi 
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
 %dir %attr(0755,root,root) %{_sysconfdir}/%{name}
