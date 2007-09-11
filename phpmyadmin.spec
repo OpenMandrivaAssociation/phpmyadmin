@@ -133,25 +133,13 @@ convert themes/original/img/logo_right.png -resize 32x32  %{buildroot}%{_iconsdi
 convert themes/original/img/logo_right.png -resize 48x48  %{buildroot}%{_liconsdir}/%{name}.png
 
 # install menu entry.
-install -d %{buildroot}%{_menudir}
-cat > %{buildroot}%{_menudir}/%{name} << EOF
-?package(%{name}): \
-needs=X11 \
-section="More Applications/Databases" \
-title="phpMyAdmin" \
-longtitle="Web administration GUI for MySQL" \
-command="%{_bindir}/www-browser http://localhost/%{name}/" \
-icon="%{name}.png" \
-xdg=true
-EOF
-
 # XDG menu
 install -d %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=phpMyAdmin
 Comment=%{summary}
-Exec="%{_bindir}/www-browser http://localhost/%{name}/"
+Exec=%{_bindir}/www-browser http://localhost/%{name}/
 Icon=%{name}
 Terminal=false
 Type=Application
@@ -182,7 +170,6 @@ rm -rf %{buildroot}
 %dir %attr(0755,root,root) %{_sysconfdir}/%{name}
 %attr(0640,apache,root) %config(noreplace) %{_sysconfdir}/%{name}/config.default.php
 /var/www/%{name}
-%{_menudir}/%{name}
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
