@@ -2,7 +2,7 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        2.11.1.2
+Version:        2.11.2
 Release:        %mkrel 1
 License:        GPL
 Group:          System/Servers
