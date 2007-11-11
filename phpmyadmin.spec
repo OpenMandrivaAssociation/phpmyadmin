@@ -2,12 +2,12 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        2.11.2
+Version:        2.11.2.1
 Release:        %mkrel 1
 License:        GPL
 Group:          System/Servers
 URL:            http://www.phpmyadmin.net/
-Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.bz2
+Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.gz
 Source10:       http://prdownloads.sourceforge.net/phpmyadmin/aqua-2.2a.tar.bz2
 Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.2a.tar.bz2
 Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.2a.tar.bz2
