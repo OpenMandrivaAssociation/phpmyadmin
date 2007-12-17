@@ -22,7 +22,6 @@ Requires(postun): rpm-helper
 BuildArch:      noarch
 BuildRequires:  ImageMagick
 BuildRequires:  apache-base >= 2.0.54
-BuildRoot:      %{_tmppath}/%{name}-buildroot
 
 Obsoletes: phpMyAdmin
 Conflicts: phpMyAdmin
