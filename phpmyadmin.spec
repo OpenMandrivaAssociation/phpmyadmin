@@ -155,11 +155,15 @@ BLOWFISH=`echo -n $BLOWFISH | md5sum | awk '{print $1}'`
 perl -pi -e "s|_BLOWFISH_SECRET_|$BLOWFISH|g" %{_sysconfdir}/%{name}/config.default.php
 
 %_post_webapp
+%if %mdkversion < 200900
 %update_menus
+%endif
 
 %postun
 %_postun_webapp
+%if %mdkversion < 200900
 %clean_menus
+%endif
 
 %clean
 rm -rf %{buildroot}
