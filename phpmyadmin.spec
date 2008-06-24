@@ -1,14 +1,13 @@
 %define rname phpMyAdmin
-%define betaver rc1
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
 Version:        2.11.7
-Release:        %mkrel -c %betaver 1
+Release:        %mkrel 1
 License:        GPL
 Group:          System/Servers
 URL:            http://www.phpmyadmin.net/
-Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-%{betaver}-all-languages.tar.bz2
+Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.bz2
 Source10:       http://prdownloads.sourceforge.net/phpmyadmin/aqua-2.2a.tar.bz2
 Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.2a.tar.bz2
 Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.2a.tar.bz2
@@ -41,7 +40,7 @@ data to CSV value, administer multiple servers and single
 databases.
 
 %prep
-%setup -q -n %{rname}-%{version}-%{betaver}-all-languages
+%setup -q -n %{rname}-%{version}-all-languages
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
