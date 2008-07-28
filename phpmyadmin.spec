@@ -2,7 +2,7 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        2.11.7.1
+Version:        2.11.8
 Release:        %mkrel 1
 License:        GPL
 Group:          System/Servers
@@ -22,7 +22,7 @@ Requires(postun): rpm-helper
 BuildArch:      noarch
 BuildRequires:  ImageMagick
 BuildRequires:  apache-base >= 2.0.54
-BuildRoot:      %{_tmppath}/%{name}-buildroot
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Obsoletes: phpMyAdmin
 Conflicts: phpMyAdmin
