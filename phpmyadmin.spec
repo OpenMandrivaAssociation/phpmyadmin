@@ -2,9 +2,9 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        2.11.8
+Version:        2.11.8.1
 Release:        %mkrel 1
-License:        GPL
+License:        GPLv2
 Group:          System/Servers
 URL:            http://www.phpmyadmin.net/
 Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.bz2
