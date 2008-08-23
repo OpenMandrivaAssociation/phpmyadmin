@@ -1,16 +1,27 @@
 %define rname phpMyAdmin
 
+%define betaver beta
+%define rel 1
+
+%if %betaver
+%define tarballver %version-%betaver
+%define release %mkrel -c %betaver %rel
+%else
+%define tarballver %version
+%define release %mkrel %rel
+%endif
+
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        2.11.8.1
-Release:        %mkrel 1
+Version:        3.0.0
+Release:        %release
 License:        GPLv2
 Group:          System/Servers
 URL:            http://www.phpmyadmin.net/
-Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.bz2
+Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{tarballver}-all-languages.tar.bz2
 Source10:       http://prdownloads.sourceforge.net/phpmyadmin/aqua-2.2a.tar.bz2
-Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.2a.tar.bz2
-Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.2a.tar.bz2
+Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.11a.tar.bz2
+Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.10a.tar.bz2
 Source13:       http://prdownloads.sourceforge.net/phpmyadmin/xp_basic-2.1.tar.bz2
 Patch0:         phpMyAdmin-use-cookie-in-config.diff
 Patch1:         phpMyAdmin-2.8.2.1-bug23847.diff
@@ -40,7 +51,7 @@ data to CSV value, administer multiple servers and single
 databases.
 
 %prep
-%setup -q -n %{rname}-%{version}-all-languages
+%setup -q -n %{rname}-%{tarballver}-all-languages
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
