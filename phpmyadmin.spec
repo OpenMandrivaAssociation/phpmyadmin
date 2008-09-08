@@ -1,6 +1,6 @@
 %define rname phpMyAdmin
 
-%define betaver beta
+%define betaver rc1
 %define rel 1
 
 %if %betaver
