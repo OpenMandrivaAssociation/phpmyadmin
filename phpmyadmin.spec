@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver rc1
-%define rel 1
+%define rel 2
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -94,7 +94,7 @@ cat > README.urpmi << EOF
 The config file name has changed name from config.inc.php to 
 config.default.php. From 2.8.0 the file moved into libraries/
 
-Now the file is put in /etc/phpMyAdmin/config.default.php and softlinked
+Now the file is put in /etc/phpmyadmin/config.default.php and softlinked
 to /var/www/%{name}/libraries/config.default.php
 EOF
 
