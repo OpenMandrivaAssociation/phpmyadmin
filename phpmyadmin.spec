@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
-%define betaver rc1
-%define rel 2
+%define betaver rc2
+%define rel 1
 
 %if %betaver
 %define tarballver %version-%betaver
