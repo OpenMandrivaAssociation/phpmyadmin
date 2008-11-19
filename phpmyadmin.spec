@@ -1,6 +1,6 @@
 %define rname phpMyAdmin
 
-%define betaver 0
+%define betaver rc1
 %define rel 1
 
 %if %betaver
@@ -13,7 +13,7 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        3.0.1.1
+Version:        3.1.0
 Release:        %release
 License:        GPLv2
 Group:          System/Servers
