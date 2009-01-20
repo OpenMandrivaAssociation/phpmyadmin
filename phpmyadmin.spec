@@ -13,7 +13,7 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        3.1.1
+Version:        3.1.2
 Release:        %release
 License:        GPLv2
 Group:          System/Servers
@@ -24,7 +24,6 @@ Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.11a
 Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.10a.tar.bz2
 Source13:       http://prdownloads.sourceforge.net/phpmyadmin/xp_basic-2.1.tar.bz2
 Patch0:         phpMyAdmin-use-cookie-in-config.diff
-Patch1:         phpMyAdmin-2.8.2.1-bug23847.diff
 Patch2:         phpMyAdmin-bug22020.diff
 Requires(pre):  apache-mod_php php-mysql php-mbstring php-mcrypt
 Requires:       apache-mod_php php-mysql php-mbstring php-mcrypt
@@ -53,7 +52,6 @@ databases.
 %prep
 %setup -q -n %{rname}-%{tarballver}-all-languages
 %patch0 -p0
-%patch1 -p1
 %patch2 -p1
 
 pushd themes
