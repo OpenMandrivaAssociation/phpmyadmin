@@ -84,15 +84,16 @@ pushd %{buildroot}/var/www/%{name}
 popd
 
 # fix config file location
-mv %{buildroot}/var/www/%{name}/libraries/config.default.php %{buildroot}%{_sysconfdir}/%{name}/
-ln -s %{_sysconfdir}/%{name}/config.default.php %{buildroot}/var/www/%{name}/libraries/config.default.php
+mv %{buildroot}/var/www/%{name}/config.sample.inc.php \
+    %{buildroot}%{_sysconfdir}/%{name}/config.php
+pushd  %{buildroot}/var/www/%{name}
+ln -s ../../..%{_sysconfdir}/%{name}/config.php config.inc.php
+popd
 
 cat > README.urpmi << EOF
-The config file name has changed name from config.inc.php to 
-config.default.php. From 2.8.0 the file moved into libraries/
-
-Now the file is put in /etc/phpmyadmin/config.default.php and softlinked
-to /var/www/%{name}/libraries/config.default.php
+The actual configuration file is /etc/phpmyadmin/config.php.
+The config.default.inc.php file contains default values, and is not supposed to 
+be modified.
 EOF
 
 cat > %{buildroot}%{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf << EOF
@@ -159,7 +160,7 @@ EOF
 %randstr BLOWFISH 8
 
 BLOWFISH=`echo -n $BLOWFISH | md5sum | awk '{print $1}'`
-perl -pi -e "s|_BLOWFISH_SECRET_|$BLOWFISH|g" %{_sysconfdir}/%{name}/config.default.php
+perl -pi -e "s|_BLOWFISH_SECRET_|$BLOWFISH|g" %{_sysconfdir}/%{name}/config.php
 
 %_post_webapp
 %if %mdkversion < 200900
@@ -180,7 +181,7 @@ rm -rf %{buildroot}
 %doc CREDITS ChangeLog Documentation.txt INSTALL LICENSE README RELEASE-DATE-* TODO scripts README.urpmi 
 %attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
 %dir %attr(0755,root,root) %{_sysconfdir}/%{name}
-%attr(0640,apache,root) %config(noreplace) %{_sysconfdir}/%{name}/config.default.php
+%attr(0640,apache,root) %config(noreplace) %{_sysconfdir}/%{name}/config.php
 /var/www/%{name}
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
