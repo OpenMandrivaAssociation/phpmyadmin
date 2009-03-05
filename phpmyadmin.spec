@@ -60,9 +60,6 @@ for i in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13}; do
 done
 popd
 
-# strip away annoying ^M
-find -type f | grep -v "\.gif" | grep -v "\.png" | grep -v "\.jpg" | grep -v "\.z" | xargs %{__perl} -pi -e 's/\r$//g'
-
 %build
 
 %install
