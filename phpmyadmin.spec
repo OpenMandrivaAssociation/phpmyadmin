@@ -23,7 +23,6 @@ Source10:       http://prdownloads.sourceforge.net/phpmyadmin/aqua-2.2a.tar.bz2
 Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.11a.tar.bz2
 Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.10a.tar.bz2
 Source13:       http://prdownloads.sourceforge.net/phpmyadmin/xp_basic-2.1.tar.bz2
-Patch0:         phpMyAdmin-use-cookie-in-config.diff
 Patch2:         phpMyAdmin-bug22020.diff
 Requires(pre):  apache-mod_php php-mysql php-mbstring php-mcrypt
 Requires:       apache-mod_php php-mysql php-mbstring php-mcrypt
@@ -37,9 +36,6 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Obsoletes: phpMyAdmin
 Conflicts: phpMyAdmin
 
-# Macro for generating an environment variable (%1) with %2 random characters
-%define randstr() %1=`perl -e 'for ($i = 0, $bit = "!", $key = ""; $i < %2; $i++) {while ($bit !~ /^[0-9A-Za-z]$/) { $bit = chr(rand(90) + 32); } $key .= $bit; $bit = "!"; } print "$key";'`
-
 %description
 phpMyAdmin is intended to handle the administration of MySQL over
 the web. Currently it can : create and drop databases, create,
@@ -51,7 +47,6 @@ databases.
 
 %prep
 %setup -q -n %{rname}-%{tarballver}-all-languages
-%patch0 -p0
 %patch2 -p1
 
 pushd themes
@@ -156,11 +151,13 @@ Categories=X-MandrivaLinux-MoreApplications-Databases;
 EOF
 
 %post
+# generate random secret
+secret=%_get_password 46
 
-%randstr BLOWFISH 8
-
-BLOWFISH=`echo -n $BLOWFISH | md5sum | awk '{print $1}'`
-perl -pi -e "s|_BLOWFISH_SECRET_|$BLOWFISH|g" %{_sysconfdir}/%{name}/config.php
+# blowfish secret
+perl -pi \
+    -e "s|\$cfg['blowfish_secret'] = .*|\$cfg['blowfish_secret'] = '$secret'|" \ 
+    %{_sysconfdir}/%{name}/config.php
 
 %_post_webapp
 %if %mdkversion < 200900
