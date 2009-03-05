@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 1
+%define rel 2
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -151,13 +151,23 @@ Type=Application
 Categories=X-MandrivaLinux-MoreApplications-Databases;
 EOF
 
+%pretrans 
+# fix configuration file name change
+if [ -f %{_sysconfdir}/phpmyadmin/config.default.php ]; then
+    mv %{_sysconfdir}/phpmyadmin/config.default.php \
+        %{_sysconfdir}/phpmyadmin/config.php
+fi
+if [ -L /var/www/phpmyadmin/libraries/config.default.php ]; then
+    rm -f /var/www/phpmyadmin/libraries/config.default.php
+fi
+
 %post
 # generate random secret
 secret=%_get_password 46
 
 # blowfish secret
 perl -pi \
-    -e "s|\$cfg['blowfish_secret'] = .*|\$cfg['blowfish_secret'] = '$secret'|" \ 
+    -e "s|\\\$cfg\\['blowfish_secret'\\] = ''|\\\$cfg\\['blowfish_secret'\\] = '$secret'|" \
     %{_sysconfdir}/%{name}/config.php
 
 %_post_webapp
