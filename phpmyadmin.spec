@@ -75,8 +75,10 @@ cp -aRf * %{buildroot}/var/www/%{name}/
 
 # cleanup
 pushd %{buildroot}/var/www/%{name}
-    rm -f CREDITS ChangeLog Documentation.txt INSTALL LICENSE README RELEASE-DATE-* TODO
+    rm -f CREDITS ChangeLog Documentation.txt INSTALL LICENSE README 
+    rm -f README.VENDOR RELEASE-DATE-* TODO
     rm -rf scripts
+    rm -rf contrib
     rm -f lang/*.sh libraries/transformations/*.sh
     find -name "\.htaccess" | xargs rm -f
 popd
