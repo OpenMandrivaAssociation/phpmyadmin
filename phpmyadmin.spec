@@ -84,6 +84,7 @@ mv %{buildroot}/var/www/%{name}/config.sample.inc.php \
 pushd  %{buildroot}/var/www/%{name}
 ln -s ../../..%{_sysconfdir}/%{name}/config.php config.inc.php
 popd
+chmod 640 %{buildroot}%{_sysconfdir}/%{name}/config.php
 
 cat > README.urpmi << EOF
 The actual configuration file is /etc/phpmyadmin/config.php.
@@ -174,11 +175,11 @@ perl -pi \
 rm -rf %{buildroot}
 
 %files
-%defattr(0644,root,root,0755)
+%defattr(-,root,root)
 %doc CREDITS ChangeLog Documentation.txt INSTALL LICENSE README RELEASE-DATE-* TODO scripts README.urpmi 
-%attr(0644,root,root) %config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
-%dir %attr(0755,root,root) %{_sysconfdir}/%{name}
-%attr(0640,apache,root) %config(noreplace) %{_sysconfdir}/%{name}/config.php
+%config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
+%dir %{_sysconfdir}/%{name}
+%attr(-,root,apache) %config(noreplace) %{_sysconfdir}/%{name}/config.php
 /var/www/%{name}
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
