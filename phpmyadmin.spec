@@ -26,6 +26,7 @@ Source13:       http://prdownloads.sourceforge.net/phpmyadmin/xp_basic-2.1.tar.b
 Patch2:         phpMyAdmin-bug22020.diff
 Requires(pre):  apache-mod_php php-mysql php-mbstring php-mcrypt
 Requires:       apache-mod_php php-mysql php-mbstring php-mcrypt
+Suggests:	apache-mod_ssl php-bz2
 Requires(post): rpm-helper
 Requires(postun): rpm-helper
 BuildArch:      noarch
