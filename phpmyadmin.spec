@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 3
+%define rel 4
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -62,7 +62,6 @@ rm -rf %{buildroot}
 
 export DONT_RELINK=1
  
-install -d %{buildroot}%{_sysconfdir}/httpd/conf/webapps.d
 install -d %{buildroot}%{_sysconfdir}/%{name}
 install -d %{buildroot}/var/www/%{name}
 
@@ -92,12 +91,15 @@ The config.default.inc.php file contains default values, and is not supposed to
 be modified.
 EOF
 
-cat > %{buildroot}%{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf << EOF
+install -d -m 755 %{buildroot}%{webappconfdir}
+cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
 Alias /%{name} /var/www/%{name}
 
 <Directory /var/www/%{name}>
-    Order allow,deny
-    Allow from all
+    Order deny,allow
+    Deny from all
+    Allow from 127.0.0.1
+    ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
 
     php_flag session.auto_start 0
 </Directory>
@@ -171,7 +173,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc CREDITS ChangeLog Documentation.txt INSTALL LICENSE README RELEASE-DATE-* TODO scripts README.urpmi 
-%config(noreplace) %{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf
+%config(noreplace) %{webappconfdir}/%{name}.conf
 %dir %{_sysconfdir}/%{name}
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/%{name}/config.php
 /var/www/%{name}
