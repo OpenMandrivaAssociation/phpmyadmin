@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 2
+%define rel 3
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -93,7 +93,6 @@ be modified.
 EOF
 
 cat > %{buildroot}%{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf << EOF
-
 Alias /%{name} /var/www/%{name}
 
 <Directory /var/www/%{name}>
