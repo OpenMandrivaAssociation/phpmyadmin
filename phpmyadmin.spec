@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 4
+%define rel 5
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -99,7 +99,7 @@ Alias /%{name} /var/www/%{name}
     Order deny,allow
     Deny from all
     Allow from 127.0.0.1
-    ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
+    ErrorDocument 403 "Access denied per %{webappconfdir}/%{name}.conf"
 
     php_flag session.auto_start 0
 </Directory>
