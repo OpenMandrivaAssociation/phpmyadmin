@@ -96,17 +96,11 @@ cat > %{buildroot}%{_sysconfdir}/httpd/conf/webapps.d/%{name}.conf << EOF
 
 Alias /%{name} /var/www/%{name}
 
-<IfModule mod_php4.c>
-    php_flag session.auto_start 0
-</IfModule>
-
-<IfModule mod_php5.c>
-    php_flag session.auto_start 0
-</IfModule>
-
 <Directory /var/www/%{name}>
     Order allow,deny
     Allow from all
+
+    php_flag session.auto_start 0
 </Directory>
 
 <Directory /var/www/%{name}/libraries>
