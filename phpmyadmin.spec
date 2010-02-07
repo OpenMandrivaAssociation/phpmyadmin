@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 1
+%define rel 2
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -24,18 +24,17 @@ Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.11a
 Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.10a.tar.bz2
 Source13:       http://prdownloads.sourceforge.net/phpmyadmin/xp_basic-2.1.tar.bz2
 Patch2:         phpMyAdmin-bug22020.diff
-Requires(pre):  apache-mod_php php-mysql php-mbstring php-mcrypt
-Requires:       apache-mod_php php-mysql php-mbstring php-mcrypt
-Suggests:	apache-mod_ssl php-bz2
-Requires(post): rpm-helper
-Requires(postun): rpm-helper
+Requires:       apache-mod_php
+Requires:       php-mysql
+Requires:       php-mbstring
+Requires:       php-mcrypt
+%if %mdkversion < 201010
+Requires(post):   rpm-helper
+Requires(postun):   rpm-helper
+%endif
 BuildArch:      noarch
 BuildRequires:  ImageMagick
-BuildRequires:  apache-base >= 2.0.54
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
-Obsoletes: phpMyAdmin
-Conflicts: phpMyAdmin
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 phpMyAdmin is intended to handle the administration of MySQL over
@@ -106,27 +105,14 @@ Alias /%{name} /var/www/%{name}
 </IfModule>
 
 <Directory /var/www/%{name}>
-    Allow from All
+    Order allow,deny
+    Allow from all
 </Directory>
 
 <Directory /var/www/%{name}/libraries>
-    Order Deny,Allow
-    Deny from All
-    Allow from None
+    Order deny,allow
+    Deny from all
 </Directory>
-
-# Uncomment the following lines to force a redirect to a working 
-# SSL aware apache server. This serves as an example.
-# 
-#<IfModule mod_ssl.c>
-#    <LocationMatch /%{name}>
-#        Options FollowSymLinks
-#        RewriteEngine on
-#        RewriteCond %{SERVER_PORT} !^443$
-#        RewriteRule ^.*$ https://%{SERVER_NAME}%{REQUEST_URI} [L,R]
-#    </LocationMatch>
-#</IfModule>
-
 EOF
 
 # Mandriva Icons
@@ -171,13 +157,17 @@ perl -pi \
     -e "s|\\\$cfg\\['blowfish_secret'\\] = ''|\\\$cfg\\['blowfish_secret'\\] = '$secret'|" \
     %{_sysconfdir}/%{name}/config.php
 
+%if %mdkversion < 201010
 %_post_webapp
+%endif
 %if %mdkversion < 200900
 %update_menus
 %endif
 
 %postun
+%if %mdkversion < 201010
 %_postun_webapp
+%endif
 %if %mdkversion < 200900
 %clean_menus
 %endif
