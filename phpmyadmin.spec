@@ -177,6 +177,7 @@ rm -rf %{buildroot}
 %dir %{_sysconfdir}/%{name}
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/%{name}/config.php
 /var/www/%{name}
+%attr(755,root,root) /var/www/%{name}/themes
 %{_iconsdir}/%{name}.png
 %{_miconsdir}/%{name}.png
 %{_liconsdir}/%{name}.png
