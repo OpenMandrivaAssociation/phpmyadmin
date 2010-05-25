@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 1
+%define rel 2
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -24,6 +24,7 @@ Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.11a
 Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.10a.tar.bz2
 Source13:       http://prdownloads.sourceforge.net/phpmyadmin/xp_basic-2.1.tar.bz2
 Patch2:         phpMyAdmin-bug22020.diff
+Patch3:		phpMyAdmin-bug59446.diff
 Requires:       apache-mod_php
 Requires:       php-mysql
 Requires:       php-mbstring
@@ -48,6 +49,7 @@ databases.
 %prep
 %setup -q -n %{rname}-%{tarballver}-all-languages
 %patch2 -p1
+%patch3 -p1
 
 pushd themes
 for i in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13}; do
