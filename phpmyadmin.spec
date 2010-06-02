@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 2
+%define rel 1
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -13,18 +13,20 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        3.3.2
+Version:        3.3.3
 Release:        %release
 License:        GPLv2
 Group:          System/Servers
 URL:            http://www.phpmyadmin.net/
 Source0:        http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{tarballver}-all-languages.tar.bz2
 Source10:       http://prdownloads.sourceforge.net/phpmyadmin/aqua-2.2a.tar.bz2
-Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-2.11a.tar.bz2
-Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-2.10a.tar.bz2
+Source11:       http://prdownloads.sourceforge.net/phpmyadmin/arctic_ocean-3.3.tar.bz2
+Source12:       http://prdownloads.sourceforge.net/phpmyadmin/paradice-3.0a.tar.bz2
 Source13:       http://prdownloads.sourceforge.net/phpmyadmin/xp_basic-2.1.tar.bz2
+Source14:	http://prdownloads.sourceforge.net/phpmyadmin/crimson_gray-3.1-3.2.tar.bz2
+Source15:	http://prdownloads.sourceforge.net/phpmyadmin/hillside-3.0.tar.bz2
+Source16:	http://prdownloads.sourceforge.net/phpmyadmin/smooth_yellow-3.3.tar.bz2
 Patch2:         phpMyAdmin-bug22020.diff
-Patch3:		phpMyAdmin-bug59446.diff
 Requires:       apache-mod_php
 Requires:       php-mysql
 Requires:       php-mbstring
@@ -49,7 +51,6 @@ databases.
 %prep
 %setup -q -n %{rname}-%{tarballver}-all-languages
 %patch2 -p1
-%patch3 -p1
 
 pushd themes
 for i in %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13}; do
