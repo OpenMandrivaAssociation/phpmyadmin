@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 2
+%define rel 3
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -157,7 +157,7 @@ perl -pi \
     %{_sysconfdir}/%{name}/config.php
 
 # merge config
-ccp --set NoOrphans -d -o %{_sysconfdir}/%{name}/config.php -n %{_sysconfdir}/%{name}/config.php.rpmnew -i
+ccp --set AllowOrphans -d -o %{_sysconfdir}/%{name}/config.php -n %{_sysconfdir}/%{name}/config.php.rpmnew -i
 
 %if %mdkversion < 201010
 %_post_webapp
