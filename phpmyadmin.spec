@@ -31,6 +31,7 @@ Requires:       apache-mod_php
 Requires:       php-mysql
 Requires:       php-mbstring
 Requires:       php-mcrypt
+Requires(post):   ccp
 %if %mdkversion < 201010
 Requires(post):   rpm-helper
 Requires(postun):   rpm-helper
@@ -154,6 +155,9 @@ secret=%_get_password 46
 perl -pi \
     -e "s|\\\$cfg\\['blowfish_secret'\\] = ''|\\\$cfg\\['blowfish_secret'\\] = '$secret'|" \
     %{_sysconfdir}/%{name}/config.php
+
+# merge config
+ccp --set NoOrphans -d -o %{_sysconfdir}/%{name}/config.php -n %{_sysconfdir}/%{name}/config.php.rpmnew -i
 
 %if %mdkversion < 201010
 %_post_webapp
