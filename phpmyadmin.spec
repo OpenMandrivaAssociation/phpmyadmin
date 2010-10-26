@@ -13,7 +13,7 @@
 
 Summary:        Handles the administration of MySQL over the web
 Name:           phpmyadmin
-Version:        3.3.7
+Version:        3.3.8
 Release:        %release
 License:        GPLv2
 Group:          System/Servers
