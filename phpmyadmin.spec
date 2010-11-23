@@ -1,7 +1,7 @@
 %define rname phpMyAdmin
 
 %define betaver 0
-%define rel 1
+%define rel 2
 
 %if %betaver
 %define tarballver %version-%betaver
@@ -133,6 +133,10 @@ Terminal=false
 Type=Application
 Categories=X-MandrivaLinux-MoreApplications-Databases;
 EOF
+
+# fix borked permissions
+find %{buildroot}/var/www/%{name} -type d -exec chmod 755 {} \;
+find %{buildroot}/var/www/%{name} -type f -exec chmod 644 {} \;
 
 %pretrans 
 # fix configuration file name change
