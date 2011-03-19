@@ -2,7 +2,7 @@
 
 %if %mandriva_branch == Cooker
 # Cooker
-%define release %mkrel 3
+%define release %mkrel 1
 %else
 # Old distros
 %define subrel 1
@@ -11,7 +11,7 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	3.3.9.2
+Version:	3.3.10
 Release:	%release
 License:	GPLv2
 Group:		System/Servers
