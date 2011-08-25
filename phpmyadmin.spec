@@ -11,12 +11,12 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	3.4.3.2
+Version:	3.4.4
 Release:	%release
 License:	GPLv2
 Group:		System/Servers
 URL:		http://www.phpmyadmin.net/
-Source0:	http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.gz
 Source1:	phpmyadmin-16x16.png
 Source2:	phpmyadmin-32x32.png
 Source3:	phpmyadmin-48x48.png
