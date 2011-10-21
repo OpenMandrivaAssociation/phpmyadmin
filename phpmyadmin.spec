@@ -11,7 +11,7 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	3.4.5
+Version:	3.4.6
 Release:	%release
 License:	GPLv2
 Group:		System/Servers
@@ -151,16 +151,10 @@ perl -pi \
 %if %mdkversion < 201010
 %_post_webapp
 %endif
-%if %mdkversion < 200900
-%update_menus
-%endif
 
 %postun
 %if %mdkversion < 201010
 %_postun_webapp
-%endif
-%if %mdkversion < 200900
-%clean_menus
 %endif
 
 %clean
