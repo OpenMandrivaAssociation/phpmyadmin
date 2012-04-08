@@ -11,7 +11,7 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	3.4.10.2
+Version:	3.5.0
 Release:	%release
 License:	GPLv2
 Group:		System/Servers
@@ -162,7 +162,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%doc CREDITS ChangeLog Documentation.txt INSTALL LICENSE README RELEASE-DATE-* TODO scripts README.urpmi
+%doc ChangeLog Documentation.txt LICENSE README RELEASE-DATE-* examples README.urpmi
 %config(noreplace) %{webappconfdir}/%{name}.conf
 %dir %{_sysconfdir}/%{name}
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/%{name}/config.php
