@@ -11,7 +11,7 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	3.5.0
+Version:	3.5.1
 Release:	%release
 License:	GPLv2
 Group:		System/Servers
