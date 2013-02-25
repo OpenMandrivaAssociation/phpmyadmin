@@ -11,7 +11,7 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	3.5.2
+Version:	3.5.7
 Release:	%release
 License:	GPLv2
 Group:		System/Servers
@@ -24,13 +24,8 @@ Requires:	apache-mod_php
 Requires:	php-mysql
 Requires:	php-mbstring
 Requires:	php-mcrypt
-%if %mdkversion < 201010
-Requires(post): rpm-helper
-Requires(postun): rpm-helper
-%endif
 BuildArch:	noarch
 Obsoletes:	phpMyAdmin
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 phpMyAdmin is intended to handle the administration of MySQL over the web.
@@ -46,8 +41,6 @@ and single databases.
 %build
 
 %install
-rm -rf %{buildroot}
-
 export DONT_RELINK=1
 
 install -d %{buildroot}%{_sysconfdir}/%{name}
@@ -85,17 +78,14 @@ cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
 Alias /%{name} %{_datadir}/%{name}
 
 <Directory %{_datadir}/%{name}>
-    Order deny,allow
-    Deny from all
-    Allow from 127.0.0.1
+    Require host 127.0.0.1
     ErrorDocument 403 "Access denied per %{webappconfdir}/%{name}.conf"
 
     php_flag session.auto_start 0
 </Directory>
 
 <Directory %{_datadir}/%{name}/libraries>
-    Order deny,allow
-    Deny from all
+    Require all denied
 </Directory>
 EOF
 
@@ -148,17 +138,7 @@ perl -pi \
     -e "s|\\\$cfg\\['blowfish_secret'\\] = ''|\\\$cfg\\['blowfish_secret'\\] = '$secret'|" \
     %{_sysconfdir}/%{name}/config.php
 
-%if %mdkversion < 201010
-%_post_webapp
-%endif
-
-%postun
-%if %mdkversion < 201010
-%_postun_webapp
-%endif
-
 %clean
-rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
