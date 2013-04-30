@@ -1,18 +1,9 @@
 %define rname phpMyAdmin
 
-%if %mandriva_branch == Cooker
-# Cooker
-%define release %mkrel 1
-%else
-# Old distros
-%define subrel 1
-%define release %mkrel 0
-%endif
-
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
 Version:	3.5.8.1
-Release:	%release
+Release:	2
 License:	GPLv2
 Group:		System/Servers
 URL:		http://www.phpmyadmin.net/
@@ -73,13 +64,13 @@ The config.default.inc.php file contains default values, and is not supposed to
 be modified.
 EOF
 
-install -d -m 755 %{buildroot}%{webappconfdir}
-cat > %{buildroot}%{webappconfdir}/%{name}.conf << EOF
+install -d -m 755 %{buildroot}%{_webappconfdir}
+cat > %{buildroot}%{_webappconfdir}/%{name}.conf << EOF
 Alias /%{name} %{_datadir}/%{name}
 
 <Directory %{_datadir}/%{name}>
     Require host 127.0.0.1
-    ErrorDocument 403 "Access denied per %{webappconfdir}/%{name}.conf"
+    ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
 
     php_flag session.auto_start 0
 </Directory>
@@ -143,7 +134,7 @@ perl -pi \
 %files
 %defattr(-,root,root)
 %doc ChangeLog Documentation.txt LICENSE README RELEASE-DATE-* examples README.urpmi
-%config(noreplace) %{webappconfdir}/%{name}.conf
+%config(noreplace) %{_webappconfdir}/%{name}.conf
 %dir %{_sysconfdir}/%{name}
 %attr(-,root,apache) %config(noreplace) %{_sysconfdir}/%{name}/config.php
 %{_datadir}/%{name}
