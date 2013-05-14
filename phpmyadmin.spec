@@ -3,7 +3,7 @@
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
 Version:	3.5.8.1
-Release:	2
+Release:	3
 License:	GPLv2
 Group:		System/Servers
 URL:		http://www.phpmyadmin.net/
@@ -69,7 +69,7 @@ cat > %{buildroot}%{_webappconfdir}/%{name}.conf << EOF
 Alias /%{name} %{_datadir}/%{name}
 
 <Directory %{_datadir}/%{name}>
-    Require host 127.0.0.1
+    Require host localhost.localdomain
     ErrorDocument 403 "Access denied per %{_webappconfdir}/%{name}.conf"
 
     php_flag session.auto_start 0
