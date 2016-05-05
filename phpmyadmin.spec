@@ -2,7 +2,7 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	4.5.0.2
+Version:	4.6.1
 Release:	1
 License:	GPLv2
 Group:		System/Servers
@@ -12,7 +12,7 @@ Source1:	phpmyadmin-16x16.png
 Source2:	phpmyadmin-32x32.png
 Source3:	phpmyadmin-48x48.png
 Requires:	apache-mod_php
-Requires:	php-mysql
+Requires:	php-mysqli
 Requires:	php-mbstring
 Requires:	php-mcrypt
 BuildArch:	noarch
