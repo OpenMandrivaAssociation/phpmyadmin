@@ -7,7 +7,7 @@ Release:	1
 License:	GPLv2
 Group:		System/Servers
 URL:		http://www.phpmyadmin.net/
-Source0:	http://prdownloads.sourceforge.net/phpmyadmin/%{rname}-%{version}-all-languages.tar.xz
+Source0:	https://files.phpmyadmin.net/phpMyAdmin/%{version}/%{rname}-%{version}-all-languages.tar.xz
 Source1:	phpmyadmin-16x16.png
 Source2:	phpmyadmin-32x32.png
 Source3:	phpmyadmin-48x48.png
