@@ -14,7 +14,7 @@ Source3:	phpmyadmin-48x48.png
 Requires:	apache-mod_php
 Requires:	php-mysqli
 Requires:	php-mbstring
-Requires:	php-mcrypt
+#Requires:	php-mcrypt
 BuildArch:	noarch
 Obsoletes:	phpMyAdmin
 
