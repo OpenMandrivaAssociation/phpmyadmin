@@ -11,6 +11,7 @@ Source0:	https://files.phpmyadmin.net/phpMyAdmin/%{version}/%{rname}-%{version}-
 Source1:	phpmyadmin-16x16.png
 Source2:	phpmyadmin-32x32.png
 Source3:	phpmyadmin-48x48.png
+Source100:	%{name}.rpmlintrc
 Requires:	apache-mod_php
 Requires:	php-mysqli
 Requires:	php-mbstring
