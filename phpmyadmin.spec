@@ -2,8 +2,8 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	4.8.0
-Release:	2
+Version:	4.8.3
+Release:	1
 License:	GPLv2
 Group:		System/Servers
 URL:		http://www.phpmyadmin.net/
@@ -14,7 +14,7 @@ Source3:	phpmyadmin-48x48.png
 Requires:	apache-mod_php
 Requires:	php-mysqli
 Requires:	php-mbstring
-#Requires:	php-mcrypt
+Requires:	php-openssl
 BuildArch:	noarch
 Obsoletes:	phpMyAdmin
 
