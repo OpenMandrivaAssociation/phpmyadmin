@@ -2,7 +2,7 @@
 
 Summary:	Handles the administration of MySQL over the web
 Name:		phpmyadmin
-Version:	5.2.2
+Version:	5.2.3
 Release:	1
 License:	GPLv2
 Group:		System/Servers
@@ -28,7 +28,7 @@ read dumps of tables, export data to CSV value, administer multiple servers
 and single databases.
 
 %prep
-%setup -q -n %{rname}-%{version}-all-languages
+%setup -q -n phpMyAdmin-5.2.3-all-languages
 
 %build
 
